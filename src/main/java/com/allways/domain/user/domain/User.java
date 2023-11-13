@@ -1,13 +1,10 @@
 package com.allways.domain.user.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
+import com.allways.domain.blog.domain.Blog;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +31,9 @@ public class User extends EntityDate {
 
 	@Column
 	private String profileImgSeq;
+
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Blog blog;
 
 
 }
