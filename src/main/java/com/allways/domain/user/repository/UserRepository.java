@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u left join Blog b on u.userSeq = b.user.userSeq where u.userSeq = :userSeq")
-    User findUserByUserSeq(@Param("userSeq") Long userSeq);
+    Optional<User> findUserByUserSeq(@Param("userSeq") Long userSeq);
 }
