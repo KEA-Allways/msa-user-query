@@ -16,8 +16,8 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    public UserDto readUser(UserReadRequest req){
-        User user = userRepository.findUserByUserSeq(req.getUserSeq()).orElseThrow(MemberNotFoundException::new);
+    public UserDto readUser(Long userSeq){
+        User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(MemberNotFoundException::new);
 
         return UserDto.toDto(user);
     }
