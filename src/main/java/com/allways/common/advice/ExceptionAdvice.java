@@ -1,6 +1,7 @@
 package com.allways.common.advice;
 
 import com.allways.common.response.Response;
+import com.allways.domain.blog.exception.BlogNotFoundException;
 import com.allways.domain.user.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,12 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)//404
     public Response memberNotFoundException() {
         return Response.failure(-1007,"요청한 회원을 찾을 수 없습니다.");
+    }
+
+    @ExceptionHandler (BlogNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)//404
+    public Response BlogNotFoundException() {
+        return Response.failure(-1016,"해당 블로그를 찾을 수 없습니다.");
     }
 
 }
