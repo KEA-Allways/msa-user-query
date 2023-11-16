@@ -1,7 +1,7 @@
 package com.allways.domain.blog.service;
 
-import com.allways.domain.blog.domain.Blog;
-import com.allways.domain.blog.domain.BlogDto;
+import com.allways.domain.blog.entity.Blog;
+import com.allways.domain.blog.entity.BlogDto;
 import com.allways.domain.blog.exception.BlogNotFoundException;
 import com.allways.domain.blog.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;

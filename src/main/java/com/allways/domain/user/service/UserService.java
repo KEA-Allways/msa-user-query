@@ -3,9 +3,8 @@ package com.allways.domain.user.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.allways.domain.user.domain.User;
-import com.allways.domain.user.domain.UserDto;
-import com.allways.domain.user.domain.UserReadRequest;
+import com.allways.domain.user.entity.User;
+import com.allways.domain.user.entity.UserDto;
 import com.allways.domain.user.dto.UserByPostRequest;
 import com.allways.domain.user.dto.UserByPostResponse;
 import com.allways.domain.user.exception.UserNotFoundException;

@@ -1,6 +1,5 @@
-package com.allways.domain.blog.domain;
+package com.allways.domain.blog.entity;
 
-import com.allways.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
