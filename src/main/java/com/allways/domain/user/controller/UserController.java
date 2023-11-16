@@ -18,25 +18,18 @@ public class UserController {
 
     private final UserService userService;
 
+    //로그인한 유저의 정보 조회
     @GetMapping("/api/users")
     @ResponseStatus(HttpStatus.OK)
-    public Response readUser(@Valid UserReadRequest req){
-        return Response.success(userService.readUser(req));
+    public Response readUser(Long userSeq){
+        return Response.success(userService.readUser(userSeq));
     }
 
+    //특정 유저의 정보 조회
     @GetMapping("/api/users/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response readUserBlog(@PathVariable Long userSeq){
-        UserReadRequest req = new UserReadRequest();
-        req.setUserSeq(userSeq);
-        return Response.success(userService.readUser(req));
-    }
-
-    @GetMapping("/api/users/detail")
-    @ResponseStatus(HttpStatus.OK)
-    public Response readUserDetail(){
-
-        return Response.success();
+        return Response.success(userService.readUser(userSeq));
     }
 
 
