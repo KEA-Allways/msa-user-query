@@ -6,12 +6,9 @@ import com.allways.domain.user.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import javax.management.relation.RoleNotFoundException;
 
 @RestControllerAdvice
 @Slf4j
@@ -32,7 +29,7 @@ public class ExceptionAdvice {
     }
 
 
-    @ExceptionHandler (MemberNotFoundException.class)
+    @ExceptionHandler (UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)//404
     public Response memberNotFoundException() {
         return Response.failure(-1007,"요청한 회원을 찾을 수 없습니다.");
