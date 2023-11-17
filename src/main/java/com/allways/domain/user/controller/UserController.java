@@ -23,10 +23,10 @@ public class UserController {
     }
 
     //특정 유저의 정보 조회
-    @GetMapping("/api/users/{userSeq}")
+    @GetMapping("/api/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Response readUserBlog(@PathVariable Long userSeq){
-        return Response.success(userService.readUser(userSeq));
+    public Response readUserBlog(@PathVariable String userId){
+        return Response.success(userService.readUser(userId));
     }
 
 

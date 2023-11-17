@@ -18,4 +18,10 @@ public class UserService {
         return UserResponse.toDto(user);
     }
 
+    public UserResponse readUser(String userId){
+        User user = userRepository.findUserByUserId(userId).orElseThrow(UserNotFoundException::new);
+
+        return UserResponse.toDto(user);
+    }
+
 }

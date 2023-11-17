@@ -43,7 +43,7 @@ public class UserFeignService {
 
         for (UserByPostFeignRequest userByPostFeignRequest : userByPostFeignRequestList) {
             for (User user : userList) {
-                if(userByPostFeignRequest.getUserSeq() == user.getUserSeq()) {
+                if(userByPostFeignRequest.getUserSeq().equals(user.getUserSeq())) {
                     userByPostFeignResponseList.add(new UserByPostFeignResponse(userByPostFeignRequest.getPostSeq(),
                             userByPostFeignRequest.getUserSeq(),
                             user.getUserId(), user.getNickname()));
