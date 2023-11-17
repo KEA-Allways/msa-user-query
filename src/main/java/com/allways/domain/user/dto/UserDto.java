@@ -1,5 +1,6 @@
-package com.allways.domain.user.domain;
+package com.allways.domain.user.dto;
 
+import com.allways.domain.user.domain.User;
 import lombok.*;
 
 

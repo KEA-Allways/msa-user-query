@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
-import com.allways.domain.blog.domain.Blog;
+import com.allways.domain.blog.entity.Blog;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

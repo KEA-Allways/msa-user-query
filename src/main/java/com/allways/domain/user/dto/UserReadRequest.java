@@ -1,4 +1,4 @@
-package com.allways.domain.user.domain;
+package com.allways.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

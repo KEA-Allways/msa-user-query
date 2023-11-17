@@ -1,4 +1,4 @@
-package com.allways.domain.user.dto;
+package com.allways.common.feign.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserByPostRequest {
+public class UserByPostFeignRequest {
 	private Long postSeq;
 	private Long userSeq;
 }

@@ -1,7 +1,5 @@
-package com.allways.domain.blog.service;
+package com.allways.common.feign.blog;
 
-import com.allways.common.feign.blog.BlogFeignResponse;
-import com.allways.domain.blog.dto.BlogResponse;
 import com.allways.domain.blog.entity.Blog;
 import com.allways.domain.blog.exception.BlogNotFoundException;
 import com.allways.domain.blog.repository.BlogRepository;
@@ -13,12 +11,14 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class BlogService {
+public class BlogFeignService {
 
     private final BlogRepository blogRepository;
 
-    public BlogResponse readBlogInfo(Long userSeq) {
+    public BlogFeignResponse queryBlog(Long userSeq) {
         Blog blog = blogRepository.findBlogInfoByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
-        return BlogResponse.toDto(blog);
+        BlogFeignResponse blogFeignResponse = new BlogFeignResponse(blog.getBlogSeq(), blog.getBlogName(), blog.getBlogDescription());
+        return blogFeignResponse;
     }
+
 }
