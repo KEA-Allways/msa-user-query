@@ -2,7 +2,7 @@ package com.allways.domain.user.repository;
 
 import java.util.List;
 
-import com.allways.domain.user.domain.User;
+import com.allways.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
