@@ -1,6 +1,5 @@
 package com.allways.common.feign.blog;
 
-import com.allways.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

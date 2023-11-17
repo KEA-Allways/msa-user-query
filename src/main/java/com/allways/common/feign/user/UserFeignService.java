@@ -3,8 +3,7 @@ package com.allways.common.feign.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.allways.domain.user.domain.User;
-import com.allways.domain.user.dto.UserDto;
+import com.allways.domain.user.entity.User;
 import com.allways.domain.user.exception.UserNotFoundException;
 import com.allways.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,7 @@ public class UserFeignService {
 
 
     @Transactional
-    public List<UserByPostFeignResponse> queryAllUser(List<UserByPostFeignRequest> userByPostFeignRequestList){
+    public List<UserByPostFeignResponse> queryUsersByPost(List<UserByPostFeignRequest> userByPostFeignRequestList){
 
         List<Long> userSeqList = new ArrayList<>();
 
