@@ -4,10 +4,7 @@ import com.allways.common.response.Response;
 import com.allways.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,19 +12,20 @@ public class UserController {
 
     private final UserService userService;
 
-    //로그인한 유저의 정보 조회
+    // 요청자의 정보 조회
+    // RequestHeader로 받아오는 userSeq는 요청자의 userSeq이기에 api를 통해 호출하는 userSeq와는 다를 수도 있다.
     @GetMapping("/api/users")
     @ResponseStatus(HttpStatus.OK)
-    public Response readUser(Long userSeq){
+    public Response readUser(@RequestHeader(value = "userSeq") Long userSeq) {;
+//        System.out.println(userSeq);
         return Response.success(userService.readUser(userSeq));
     }
 
-    //특정 유저의 정보 조회
+    // 특정 유저의 정보 조회
+    // 뒤의 코드를 보니 userSeq로 사용할때랑 userId로 사용할때 사용법을 다르게 하려고 userId로 적어둔 모양임
     @GetMapping("/api/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Response readUserBlog(@PathVariable String userId){
+    public Response readSpecificUser(@PathVariable String userId) {
         return Response.success(userService.readUser(userId));
     }
-
-
 }
