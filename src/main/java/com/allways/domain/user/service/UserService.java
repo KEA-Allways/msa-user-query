@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    public UserResponse readUser(Long userSeq){
+    public UserResponse readUserBySeq(Long userSeq){
         User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(UserNotFoundException::new);
 
         return UserResponse.toDto(user);
     }
 
-    public UserResponse readUser(String userId){
+    public UserResponse readUserById(String userId){
         User user = userRepository.findUserByUserId(userId).orElseThrow(UserNotFoundException::new);
 
         return UserResponse.toDto(user);

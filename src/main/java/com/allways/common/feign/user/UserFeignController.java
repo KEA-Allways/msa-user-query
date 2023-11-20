@@ -24,8 +24,6 @@ public class UserFeignController {
 	@PostMapping("/api/users/feign")
 	@ResponseStatus(HttpStatus.OK)
 	public List<UserByPostFeignResponse> queryUsersByPost(@RequestBody List<UserByPostFeignRequest> userByPostFeignRequest){
-
-		List<UserByPostFeignResponse> userList = userFeignService.queryUsersByPost(userByPostFeignRequest);
-		return userList;
+		return userFeignService.queryUsersByPost(userByPostFeignRequest);
 	}
 }

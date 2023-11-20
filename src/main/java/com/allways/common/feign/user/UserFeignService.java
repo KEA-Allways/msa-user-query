@@ -20,11 +20,9 @@ public class UserFeignService {
     public UserFeignResponse queryUser(Long userSeq){
         User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(UserNotFoundException::new);
 
-        UserFeignResponse userFeignResponse = new UserFeignResponse(
+        return new UserFeignResponse(
                 user.getUserId(), user.getUserId(), user.getEmail(), user.getProfileImgSeq()
         );
-
-        return userFeignResponse;
     }
 
 
@@ -50,7 +48,6 @@ public class UserFeignService {
                 }
             }
         }
-
 
         return userByPostFeignResponseList;
     }

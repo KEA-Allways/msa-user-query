@@ -32,7 +32,4 @@ public class Blog {
 	@OneToOne
 	@JoinColumn(name = "user_seq")
 	private User user;
-
-
-
 }

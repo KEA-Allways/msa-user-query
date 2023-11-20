@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class UserQueryController {
 
     private final UserService userService;
 
@@ -17,15 +17,15 @@ public class UserController {
     @GetMapping("/api/users")
     @ResponseStatus(HttpStatus.OK)
     public Response readUser(@RequestHeader(value = "userSeq") Long userSeq) {;
-//        System.out.println(userSeq);
-        return Response.success(userService.readUser(userSeq));
+        return Response.success(userService.readUserBySeq(userSeq));
     }
 
     // 특정 유저의 정보 조회
     // 뒤의 코드를 보니 userSeq로 사용할때랑 userId로 사용할때 사용법을 다르게 하려고 userId로 적어둔 모양임
+    // UserId는 String이고 UserSeq는 Long으로 아예 서로 다른 개념
     @GetMapping("/api/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Response readSpecificUser(@PathVariable String userId) {
-        return Response.success(userService.readUser(userId));
+        return Response.success(userService.readUserById(userId));
     }
 }

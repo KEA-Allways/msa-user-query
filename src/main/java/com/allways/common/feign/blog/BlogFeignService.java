@@ -16,9 +16,8 @@ public class BlogFeignService {
     private final BlogRepository blogRepository;
 
     public BlogFeignResponse queryBlog(Long userSeq) {
-        Blog blog = blogRepository.findBlogInfoByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
-        BlogFeignResponse blogFeignResponse = new BlogFeignResponse(blog.getBlogSeq(), blog.getBlogName(), blog.getBlogDescription());
-        return blogFeignResponse;
+        Blog blog = blogRepository.findBlogByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
+        return new BlogFeignResponse(blog.getBlogSeq(), blog.getBlogName(), blog.getBlogDescription());
     }
 
 }

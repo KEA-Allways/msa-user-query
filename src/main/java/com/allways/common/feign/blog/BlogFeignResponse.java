@@ -12,6 +12,4 @@ public class BlogFeignResponse {
     private Long blogSeq;
     private String blogName;
     private String blogDescription;
-
-
 }

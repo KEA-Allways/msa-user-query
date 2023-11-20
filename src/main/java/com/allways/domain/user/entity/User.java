@@ -34,6 +34,4 @@ public class User extends EntityDate {
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Blog blog;
-
-
 }
