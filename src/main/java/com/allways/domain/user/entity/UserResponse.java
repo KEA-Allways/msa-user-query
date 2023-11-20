@@ -2,7 +2,6 @@ package com.allways.domain.user.entity;
 
 import lombok.*;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,5 +15,4 @@ public class UserResponse {
         return new UserResponse(user.getUserSeq(), user.getNickname()
                 , (user.getBlog() != null) ? user.getBlog().getBlogName() : "");
     }
-
 }

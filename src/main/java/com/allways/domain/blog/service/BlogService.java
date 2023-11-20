@@ -16,8 +16,8 @@ public class BlogService {
 
     private final BlogRepository blogRepository;
 
-    public BlogDto readBlogInfo(Long userSeq){
-        Blog blog = blogRepository.findBlogInfoByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
+    public BlogDto readBlog(Long userSeq){
+        Blog blog = blogRepository.findBlogByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
 
         return BlogDto.toDto(blog);
     }
