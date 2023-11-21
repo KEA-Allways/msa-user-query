@@ -8,6 +8,6 @@ import lombok.Data;
 public class UserByPostFeignResponse {
 	private Long postSeq;
 	private Long userSeq;
-	private String id;
+	private String userId;
 	private String nickname;
 }
