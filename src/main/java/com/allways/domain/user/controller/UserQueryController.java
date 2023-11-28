@@ -19,10 +19,9 @@ public class UserQueryController {
         return Response.success(userService.readUserBySeq(userSeq));
     }
 
-    // 특정 유저의 아이디로 정보 조회
-    @GetMapping("/api/user/{userId}")
+    @GetMapping("/api/user/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response readSpecificUser(@PathVariable String userId) {
-        return Response.success(userService.readUserById(userId));
+    public Response readSpecificUser(@PathVariable Long userSeq) {
+        return Response.success(userService.readUserBySeq(userSeq));
     }
 }
