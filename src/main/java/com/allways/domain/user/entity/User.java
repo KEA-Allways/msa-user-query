@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
-import com.allways.domain.blog.entity.Blog;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+@Setter
 public class User extends EntityDate {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +30,14 @@ public class User extends EntityDate {
 	@Column(nullable = false, unique = true)
 	private String email;
 
-	@Column
+	@Column(nullable = false, unique = true)
 	private String profileImgSeq;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Blog blog;
+	public User(String userId, String password, String nickname, String email, String profileImgSeq){
+		this.userId = userId;
+		this.password = password;
+		this.nickname = nickname;
+		this.email = email;
+		this.profileImgSeq = profileImgSeq;
+	}
 }
