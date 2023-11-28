@@ -51,4 +51,29 @@ public class UserFeignService {
 
         return userByPostFeignResponseList;
     }
+
+    @Transactional
+    public List<UserByReplyFeignResponse> queryUsersByReply(List<UserByReplyFeignRequest> userByReplyFeignRequestList){
+
+        List<Long> userSeqList = new ArrayList<>();
+
+        for (UserByReplyFeignRequest userByReplyFeignRequest : userByReplyFeignRequestList) {
+            userSeqList.add(userByReplyFeignRequest.getUserSeq());
+        }
+
+        List<User> userList = userRepository.findUserByUserSeqIn(userSeqList);
+
+        List<UserByReplyFeignResponse> userByReplyFeignResponseList = new ArrayList<>();
+
+        for (UserByReplyFeignRequest userByReplyFeignRequest : userByReplyFeignRequestList) {
+            for (User user : userList) {
+                if(userByReplyFeignRequest.getUserSeq().equals(user.getUserSeq())) {
+                    userByReplyFeignResponseList.add(new UserByReplyFeignResponse(userByReplyFeignRequest.getReplySeq(),
+                            userByReplyFeignRequest.getUserSeq(), user.getUserId(), user.getNickname()));
+                }
+            }
+        }
+
+        return userByReplyFeignResponseList;
+    }
 }
