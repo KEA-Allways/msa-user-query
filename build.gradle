@@ -45,3 +45,8 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar{
+	archivesBaseName = 'allways'
+	archiveFileName = 'msa-user-query.jar'
+}
