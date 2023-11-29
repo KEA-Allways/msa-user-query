@@ -8,7 +8,6 @@ import com.allways.domain.blog.repository.BlogRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -20,43 +19,46 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserQueryServiceTest {
-
     @Mock private UserRepository userRepository;
     @Mock private BlogRepository blogRepository;
     @InjectMocks private UserQueryService userQueryService;
 
     @Test
-    void ReadUserByUserSeqTest() {
+    void readUserByUserSeqTest() {
         // Given
         User user = UserFactory.createUser();
-
-        when(userRepository.findUserByUserSeq(user.getUserSeq())).thenReturn(Optional.of(user));
-        when(blogRepository.findBlogByUserSeq(user.getUserSeq())).thenReturn(Optional.empty()); // Assuming no blog found for the userSeq
+        Long userSeq = user.getUserSeq();
 
         // When
+        when(userRepository.findUserByUserSeq(userSeq)).thenReturn(Optional.of(user));
+        when(blogRepository.findBlogByUserSeq(userSeq)).thenReturn(Optional.empty()); // Assuming no blog found for the userSeq
+
         // UserReadResponse 는 userSeq, nickname, blogName 만을 가지고 있다.
-        UserReadResponse userReadResponse = userQueryService.readUserBySeq(user.getUserSeq());
+        UserReadResponse userReadResponse = userQueryService.readUserBySeq(userSeq);
 
         // Then
         assertNotNull(userReadResponse);
-        assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
+        assertEquals(userSeq, userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
     }
 
     @Test
-    void testReadUserById() {
+    void readUserByIdTest() {
         // Given
         User user = UserFactory.createUser();
-
-        when(userRepository.findUserByUserId(user.getUserId())).thenReturn(Optional.of(user));
-        when(blogRepository.findBlogByUserSeq(user.getUserSeq())).thenReturn(Optional.empty()); // Assuming no blog found for the userSeq
+        String userId = user.getUserId();
+        Long userSeq = user.getUserSeq();
 
         // When
-        UserReadResponse userReadResponse = userQueryService.readUserById(user.getUserId());
+        when(userRepository.findUserByUserId(userId)).thenReturn(Optional.of(user));
+        when(blogRepository.findBlogByUserSeq(userSeq)).thenReturn(Optional.empty());
+
+        UserReadResponse userReadResponse = userQueryService.readUserById(userId);
 
         // Then
+        // userReadResponse의 내용물은 userSeq, nickname, blogName이다.
         assertNotNull(userReadResponse);
-        assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
+        assertEquals(userSeq, userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
     }
 }

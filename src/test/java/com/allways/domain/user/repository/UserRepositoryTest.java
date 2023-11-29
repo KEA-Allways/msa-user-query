@@ -4,7 +4,6 @@ import com.allways.common.factory.user.UserFactory;
 import com.allways.domain.user.entity.User;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,13 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 @ActiveProfiles("test")
 public class UserRepositoryTest {
-
     @Autowired private UserRepository userRepository;
     @Autowired private EntityManager EntityManager;
 
     @Test
     @Transactional
-    void FindUserByUserSeqTest() {
+    void findUserByUserSeqTest() {
         // Given
         User user = UserFactory.createUser();
 
@@ -52,7 +50,7 @@ public class UserRepositoryTest {
 
     @Test
     @Transactional
-    void FindUserByUserIdTest() {
+    void findUserByUserIdTest() {
         // Given
         User user = UserFactory.createUser();
 

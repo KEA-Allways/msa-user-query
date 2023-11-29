@@ -18,73 +18,81 @@ public class BlogReadResponseTest {
     private final Validator validator = factory.getValidator();
 
     @Test
-    void NotBlankValidation() {
+    void blogReadResponseValidation() {
         // Given
         BlogReadResponse response = BlogReadResponseFactory.createBlogReadResponse();
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(0, violations.size());
+        assertEquals(0, violations.size(),
+                "위반 사항이 없습니다.");
     }
 
     @Test
-    void BlogSeqBlankValidation() {
+    void blogReadBlogSeqValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse(
                 null,
-                "blogName",
                 "blogDescription",
+                "blogName",
                 "email@email.com",
                 "nickname"
         );
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(1, violations.size());
+        assertEquals(1, violations.size(),
+                "blogSeq가 존재하지 않습니다.");
     }
 
     @Test
-    void BlogNameBlankValidation() {
+    void blogReadBlogDescriptionValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse(
                 1L,
-                null,
-                "blogDescription",
+                "",
+                "blogName",
                 "email@email.com",
                 "nickname"
         );
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(1, violations.size());
+        assertEquals(1, violations.size(),
+                "blogDescription이 존재하지 않습니다.");
     }
 
     @Test
-    void BlogDescriptionBlankValidation() {
+    void blogReadBlogNameValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse(
                 1L,
-                "blogName",
-                null,
+                "blogDescription",
+                "",
                 "email@email.com",
                 "nickname"
         );
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(1, violations.size());
+        assertEquals(1, violations.size(),
+                "blogName이 존재하지 않습니다.");
     }
 
     @Test
-    void EmailBlankValidation() {
+    void blogReadEmailValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse(
                 1L,
@@ -95,14 +103,16 @@ public class BlogReadResponseTest {
         );
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(1, violations.size()); // Expecting 5 violations for 5 @NotBlank fields
+        assertEquals(1, violations.size(),
+                "Email이 존재하지 않습니다."); // Expecting 5 violations for 5 @NotBlank fields
     }
 
     @Test
-    void NicknameBlankValidation() {
+    void blogReadNicknameValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse(
                 1L,
@@ -113,21 +123,25 @@ public class BlogReadResponseTest {
         );
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(1, violations.size()); // Expecting 5 violations for 5 @NotBlank fields
+        assertEquals(1, violations.size(),
+                "Nickname이 존재하지 않습니다.");
     }
 
     @Test
-    void AllBlankValidation() {
+    void allBlankValidation() {
         // Given
         BlogReadResponse response = new BlogReadResponse();
 
         // When
-        Set<ConstraintViolation<BlogReadResponse>> violations = validator.validate(response);
+        Set<ConstraintViolation<BlogReadResponse>> violations =
+                validator.validate(response);
 
         // Then
-        assertEquals(5, violations.size()); // Expecting 5 violations for 5 @NotBlank fields
+        assertEquals(5, violations.size(),
+                "아무 내용도 존재하지 않습니다.");
     }
 }

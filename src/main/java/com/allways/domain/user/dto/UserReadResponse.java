@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserReadResponse {
-
     @NotNull private Long userSeq;
     @NotBlank private String nickname;
     @NotBlank private String blogName;
