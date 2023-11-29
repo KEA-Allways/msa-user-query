@@ -1,6 +1,8 @@
 package com.allways.domain.user.service;
 
+import com.allways.common.factory.blog.BlogFactory;
 import com.allways.common.factory.user.UserFactory;
+import com.allways.domain.blog.entity.Blog;
 import com.allways.domain.user.entity.User;
 import com.allways.domain.user.dto.UserReadResponse;
 import com.allways.domain.user.repository.UserRepository;
@@ -27,38 +29,44 @@ public class UserQueryServiceTest {
     void readUserByUserSeqTest() {
         // Given
         User user = UserFactory.createUser();
-        Long userSeq = user.getUserSeq();
+        Blog blog = BlogFactory.createBlog();
+        // 블로그의 Seq는 넣어주는 값이 아니라 자동으로 만들어지는 값인데 테스트과정에서는 블로그를 새로 만드는 과정이 없으니
+        // 블로그의 Seq를 직접 넣어주는 과정이 필요하다.
+        blog.setBlogSeq(1L);
+
+        when(userRepository.findUserByUserSeq(user.getUserSeq())).thenReturn(Optional.of(user));
+        when(blogRepository.findBlogByUserSeq(user.getUserSeq())).thenReturn(Optional.of(blog));
 
         // When
-        when(userRepository.findUserByUserSeq(userSeq)).thenReturn(Optional.of(user));
-        when(blogRepository.findBlogByUserSeq(userSeq)).thenReturn(Optional.empty()); // Assuming no blog found for the userSeq
-
         // UserReadResponse 는 userSeq, nickname, blogName 만을 가지고 있다.
-        UserReadResponse userReadResponse = userQueryService.readUserBySeq(userSeq);
+        UserReadResponse userReadResponse = userQueryService.readUserBySeq(user.getUserSeq());
 
         // Then
         assertNotNull(userReadResponse);
-        assertEquals(userSeq, userReadResponse.getUserSeq());
+        assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
+        assertEquals(blog.getBlogSeq(), userReadResponse.getBlogSeq());
+        assertEquals(blog.getBlogName(), userReadResponse.getBlogName());
     }
 
     @Test
     void readUserByIdTest() {
         // Given
         User user = UserFactory.createUser();
-        String userId = user.getUserId();
-        Long userSeq = user.getUserSeq();
+        Blog blog = BlogFactory.createBlog();
+        blog.setBlogSeq(1L);
+
+        when(userRepository.findUserByUserId(user.getUserId())).thenReturn(Optional.of(user));
+        when(blogRepository.findBlogByUserSeq(user.getUserSeq())).thenReturn(Optional.of(blog));
 
         // When
-        when(userRepository.findUserByUserId(userId)).thenReturn(Optional.of(user));
-        when(blogRepository.findBlogByUserSeq(userSeq)).thenReturn(Optional.empty());
-
-        UserReadResponse userReadResponse = userQueryService.readUserById(userId);
+        UserReadResponse userReadResponse = userQueryService.readUserById(user.getUserId());
 
         // Then
-        // userReadResponse의 내용물은 userSeq, nickname, blogName이다.
         assertNotNull(userReadResponse);
-        assertEquals(userSeq, userReadResponse.getUserSeq());
+        assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
+        assertEquals(blog.getBlogSeq(), userReadResponse.getBlogSeq());
+        assertEquals(blog.getBlogName(), userReadResponse.getBlogName());
     }
 }

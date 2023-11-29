@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlogReadResponse {
-
     @NotNull private Long blogSeq;
     @NotBlank private String blogDescription;
     @NotBlank private String blogName;

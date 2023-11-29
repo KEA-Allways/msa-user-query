@@ -18,7 +18,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserReadResponseTest {
-
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
@@ -28,12 +27,10 @@ public class UserReadResponseTest {
         UserReadResponse readResponse = UserReadResponseFactory.createUserReadResponse();
 
         // When
-        Set<ConstraintViolation<UserReadResponse>> violations =
-                validator.validate(readResponse);
+        Set<ConstraintViolation<UserReadResponse>> violations = validator.validate(readResponse);
 
         // Then
-        assertEquals(0, violations.size(),
-                "모든 조건을 만족합니다.");
+        assertEquals(0, violations.size(), "모든 조건을 만족합니다.");
     }
 
     @Test
@@ -42,7 +39,8 @@ public class UserReadResponseTest {
         UserReadResponse readResponse = UserReadResponseFactory.createUserReadResponse(
                 null,
                 "nickname",
-                "blogName"
+                "blogName",
+                1L
         );
 
         // When
@@ -51,7 +49,7 @@ public class UserReadResponseTest {
 
         // Then
         assertEquals(1, violations.size(),
-                "userSeq는 null이 아니어야 합니다.");
+                "userSeq가 null입니다.");
     }
 
     @Test
@@ -60,7 +58,8 @@ public class UserReadResponseTest {
         UserReadResponse readResponse = UserReadResponseFactory.createUserReadResponse(
                 1L,
                 "",
-                "blogName"
+                "blogName",
+                1L
         );
 
         // When
@@ -69,7 +68,7 @@ public class UserReadResponseTest {
 
         // Then
         assertEquals(1, violations.size(),
-                "nickname은 blank가 아니어야 합니다.");
+                "nickname이 blank입니다.");
     }
 
     @Test
@@ -78,7 +77,8 @@ public class UserReadResponseTest {
         UserReadResponse readResponse = UserReadResponseFactory.createUserReadResponse(
                 1L,
                 "nickname",
-                ""
+                "",
+                1L
         );
 
         // When
@@ -87,11 +87,11 @@ public class UserReadResponseTest {
 
         // Then
         assertEquals(1, violations.size(),
-                "blogName은 blank가 아니어야 합니다.");
+                "blogName이 blank입니다.");
     }
 
     @Test
-    void testToDto() {
+    void toDtoTest() {
         // Given
         User user = UserFactory.createUser();
         Blog blog = BlogFactory.createBlog();
@@ -103,6 +103,7 @@ public class UserReadResponseTest {
         assertNotNull(userReadResponse);
         assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
+        assertEquals(blog.getBlogSeq(), userReadResponse.getBlogSeq());
         assertEquals(blog.getBlogName(), userReadResponse.getBlogName());
     }
 }
