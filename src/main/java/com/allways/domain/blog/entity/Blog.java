@@ -5,18 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import com.allways.domain.user.entity.User;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+@Getter
+@Setter
 public class Blog {
 
 	@Id
@@ -29,7 +27,12 @@ public class Blog {
 	@Column
 	private String blogName;
 
-	@OneToOne
-	@JoinColumn(name = "user_seq")
-	private User user;
+	@Column
+	private Long userSeq;
+
+	public Blog(String blogName, String blogDescription, Long userSeq) {
+		this.blogName = blogName;
+		this.blogDescription = blogDescription;
+		this.userSeq = userSeq;
+	}
 }

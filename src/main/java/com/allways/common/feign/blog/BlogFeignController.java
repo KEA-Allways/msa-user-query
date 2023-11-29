@@ -1,7 +1,7 @@
 package com.allways.common.feign.blog;
 
-import com.allways.domain.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

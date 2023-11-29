@@ -6,21 +6,28 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: 1234
-  jpa:
-    database: mysql
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      properties:
-        hibernate:
-          format_sql: true
-server:
-  port: 8084
-# port: 0
+    jpa:
+      database: mysql
+      open-in-view: false
+      show-sql: true
+      hibernate:
+        properties:
+          hibernate:
+            format_sql: true
 
+  # 로깅 설정
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type: trace
+
+  # 서버 설정
+  server:
+    port: 8084
+
+# Eureka 클라이언트 설정
 eureka:
   instance:
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
   client:
     register-with-eureka: true
