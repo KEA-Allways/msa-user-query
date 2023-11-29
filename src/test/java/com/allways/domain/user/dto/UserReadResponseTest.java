@@ -25,6 +25,7 @@ public class UserReadResponseTest {
         assertNotNull(userReadResponse);
         assertEquals(user.getUserSeq(), userReadResponse.getUserSeq());
         assertEquals(user.getNickname(), userReadResponse.getNickname());
+        assertEquals(blog.getBlogSeq(), userReadResponse.getBlogSeq());
         assertEquals(blog.getBlogName(), userReadResponse.getBlogName());
     }
 
@@ -43,5 +44,6 @@ public class UserReadResponseTest {
 
         // 만들어진 블로그가 없을 시 블로그 이름은 null 값으로 지정
         assertNull(userReadResponse.getBlogName());
+        assertNull(userReadResponse.getUserSeq());
     }
 }

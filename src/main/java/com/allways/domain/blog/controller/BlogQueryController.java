@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class BlogQueryController {
-
     private final BlogQueryService blogQueryService;
 
     //유저의 블로그 정보 조회

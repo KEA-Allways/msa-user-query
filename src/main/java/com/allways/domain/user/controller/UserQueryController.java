@@ -21,7 +21,7 @@ public class UserQueryController {
         return Response.success(userQueryService.readUserBySeq(userSeq));
     }
 
-    // userSeq가 아니라 userId로 하는게 더 맞는 방식이 아닐까 고민 중 - 류창민
+    // userSeq 아니라 userId로 하는게 더 맞는 방식이 아닐까 고민 중 - 류창민
     @GetMapping("/api/user/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response readSpecificUser(@PathVariable Long userSeq) {
