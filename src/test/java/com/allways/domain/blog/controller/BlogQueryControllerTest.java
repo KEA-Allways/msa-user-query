@@ -1,6 +1,6 @@
 package com.allways.domain.blog.controller;
 
-import com.allways.domain.blog.service.BlogQueryService;
+import com.allways.domain.blog.service.BlogService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class BlogQueryControllerTest {
     private MockMvc mockMvc;
-    @Mock private BlogQueryService blogQueryService;
+    @Mock private BlogService blogService;
     @InjectMocks private BlogQueryController blogQueryController;
 
     @BeforeEach
@@ -37,6 +37,6 @@ class BlogQueryControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(blogQueryService).readBlog(userSeq);
+        verify(blogService).readBlog(userSeq);
     }
 }
