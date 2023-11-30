@@ -2,7 +2,7 @@ package com.allways.domain.user.controller;
 
 import com.allways.common.factory.user.UserReadResponseFactory;
 import com.allways.domain.user.dto.UserReadResponse;
-import com.allways.domain.user.service.UserQueryService;
+import com.allways.domain.user.service.UserService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 class UserQueryControllerTest {
-    @Mock private UserQueryService userQueryService;
+    @Mock private UserService userService;
     @InjectMocks private UserQueryController userQueryController;
     private MockMvc mockMvc;
 
@@ -35,7 +35,7 @@ class UserQueryControllerTest {
         UserReadResponse userReadResponse = UserReadResponseFactory.createUserReadResponse();
 
         // When
-        when(userQueryService.readUserBySeq(userSeq)).thenReturn(userReadResponse);
+        when(userService.readUserBySeq(userSeq)).thenReturn(userReadResponse);
 
         // Then
         mockMvc.perform(get("/api/user")
@@ -50,7 +50,7 @@ class UserQueryControllerTest {
         Long userSeq = userReadResponse.getUserSeq();
 
         // When
-        when(userQueryService.readUserBySeq(userSeq)).thenReturn(userReadResponse);
+        when(userService.readUserBySeq(userSeq)).thenReturn(userReadResponse);
 
         // Then
         mockMvc.perform(get("/api/user/{userSeq}", userSeq))
