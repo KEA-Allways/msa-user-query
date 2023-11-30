@@ -18,6 +18,7 @@ public class BlogFeignController {
     @GetMapping("/api/blogs/feign/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
     public BlogFeignResponse queryBlog(@PathVariable Long userSeq){
+
         return blogFeignService.queryBlog(userSeq);
 
     }
