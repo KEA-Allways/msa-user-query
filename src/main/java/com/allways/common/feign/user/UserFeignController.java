@@ -22,7 +22,7 @@ public class UserFeignController {
 		return userFeignService.queryUser(userSeq);
 	}
 
-	@GetMapping("/api/users/feign/{email}")
+	@GetMapping("/api/users/feign/sign/{email}")
 	@ResponseStatus(HttpStatus.OK)
 	public UserFeignResponse queryUserByEmail(@PathVariable String email) {
 		return userFeignService.queryUserByEmail(email);
