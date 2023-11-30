@@ -23,10 +23,25 @@ public class UserFeignService {
         User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(UserNotFoundException::new);
 
         return new UserFeignResponse(
-                user.getUserId(), user.getUserId(), user.getEmail(), user.getProfileImgSeq()
+                user.getUserId(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getProfileImgSeq()
         );
     }
 
+    public UserFeignResponse queryUserByEmail(String email){
+        User user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+
+        return new UserFeignResponse(
+                user.getUserId(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getProfileImgSeq()
+        );
+    }
 
     @Transactional
     public List<UserByPostFeignResponse> queryUsersByPost(List<UserByPostFeignRequest> userByPostFeignRequestList){
