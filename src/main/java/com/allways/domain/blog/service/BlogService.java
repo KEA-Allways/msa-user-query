@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class BlogQueryService {
+public class BlogService {
 
     private final BlogRepository blogRepository;
     private final UserRepository userRepository;

@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class BlogQueryServiceTest {
+class BlogServiceTest {
     @Mock private BlogRepository blogRepository;
     @Mock private UserRepository userRepository;
-    @InjectMocks private BlogQueryService blogQueryService;
+    @InjectMocks private BlogService blogService;
 
     @Test
     void readBlogTest() {
@@ -39,7 +39,7 @@ class BlogQueryServiceTest {
         when(userRepository.findUserByUserSeq(user.getUserSeq())).thenReturn(Optional.of(user));
 
         // When
-        BlogReadResponse blogReadResponse = blogQueryService.readBlog(user.getUserSeq());
+        BlogReadResponse blogReadResponse = blogService.readBlog(user.getUserSeq());
 
         // Then
         assertEquals(blog.getBlogName(), blogReadResponse.getBlogName());

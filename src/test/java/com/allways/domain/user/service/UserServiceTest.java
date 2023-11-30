@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UserQueryServiceTest {
+public class UserServiceTest {
     @Mock private UserRepository userRepository;
     @Mock private BlogRepository blogRepository;
-    @InjectMocks private UserQueryService userQueryService;
+    @InjectMocks private UserService userService;
 
     @Test
     void readUserByUserSeqTest() {
@@ -39,7 +39,7 @@ public class UserQueryServiceTest {
 
         // When
         // UserReadResponse 는 userSeq, nickname, blogName 만을 가지고 있다.
-        UserReadResponse userReadResponse = userQueryService.readUserBySeq(user.getUserSeq());
+        UserReadResponse userReadResponse = userService.readUserBySeq(user.getUserSeq());
 
         // Then
         assertNotNull(userReadResponse);
@@ -60,7 +60,7 @@ public class UserQueryServiceTest {
         when(blogRepository.findBlogByUserSeq(user.getUserSeq())).thenReturn(Optional.of(blog));
 
         // When
-        UserReadResponse userReadResponse = userQueryService.readUserById(user.getUserId());
+        UserReadResponse userReadResponse = userService.readUserById(user.getUserId());
 
         // Then
         assertNotNull(userReadResponse);
