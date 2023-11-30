@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("test")
 public class UserRepositoryTest {
     @Autowired private UserRepository userRepository;
-    @Autowired private EntityManager EntityManager;
+    @Autowired private EntityManager entityManager;
 
     @Test
     @Transactional
@@ -30,8 +30,8 @@ public class UserRepositoryTest {
         // Given
         User user = UserFactory.createUser();
 
-        EntityManager.persist(user);
-        EntityManager.flush();
+        entityManager.persist(user);
+        entityManager.flush();
 
         // When
         Optional<User> foundUser = userRepository.findUserByUserSeq(user.getUserSeq());
@@ -54,8 +54,8 @@ public class UserRepositoryTest {
         // Given
         User user = UserFactory.createUser();
 
-        EntityManager.persist(user);
-        EntityManager.flush();
+        entityManager.persist(user);
+        entityManager.flush();
 
         // When
         Optional<User> foundUser = userRepository.findUserByUserId(user.getUserId());
