@@ -1,6 +1,7 @@
 package com.allways.common.feign.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,14 @@ public class UserFeignController {
 
 	@GetMapping("/api/users/feign/{userSeq}")
 	@ResponseStatus(HttpStatus.OK)
-	public UserFeignResponse queryUser(@PathVariable Long userSeq){
+	public UserFeignResponse queryUser(@PathVariable Long userSeq) {
 		return userFeignService.queryUser(userSeq);
+	}
+
+	@GetMapping("/api/users/feign/{email}")
+	@ResponseStatus(HttpStatus.OK)
+	public UserFeignResponse queryUserByEmail(@PathVariable String email) {
+		return userFeignService.queryUserByEmail(email);
 	}
 
 	@PostMapping("/api/users/feign")
