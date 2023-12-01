@@ -6,10 +6,7 @@ import com.allways.domain.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,4 +19,5 @@ public class BlogQueryController {
     public Response readBlog(@PathVariable Long userSeq){
         return Response.success(blogService.readBlog(userSeq));
     }
+
 }
