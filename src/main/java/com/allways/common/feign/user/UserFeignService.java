@@ -6,7 +6,9 @@ import java.util.List;
 import com.allways.domain.user.entity.User;
 import com.allways.domain.user.exception.UserNotFoundException;
 import com.allways.domain.user.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,10 +23,26 @@ public class UserFeignService {
         User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(UserNotFoundException::new);
 
         return new UserFeignResponse(
-                user.getUserId(), user.getUserId(), user.getEmail(), user.getProfileImgSeq()
+                user.getUserSeq(),
+                user.getUserId(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getProfileImgSeq()
         );
     }
 
+    public UserFeignResponse queryUserByEmail(String email){
+        User user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        return new UserFeignResponse(
+                user.getUserSeq(),
+                user.getUserId(),
+                user.getNickname(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getProfileImgSeq()
+        );
+    }
 
     @Transactional
     public List<UserByPostFeignResponse> queryUsersByPost(List<UserByPostFeignRequest> userByPostFeignRequestList){
@@ -50,5 +68,30 @@ public class UserFeignService {
         }
 
         return userByPostFeignResponseList;
+    }
+
+    @Transactional
+    public List<UserByReplyFeignResponse> queryUsersByReply(List<UserByReplyFeignRequest> userByReplyFeignRequestList){
+
+        List<Long> userSeqList = new ArrayList<>();
+
+        for (UserByReplyFeignRequest userByReplyFeignRequest : userByReplyFeignRequestList) {
+            userSeqList.add(userByReplyFeignRequest.getUserSeq());
+        }
+
+        List<User> userList = userRepository.findUserByUserSeqIn(userSeqList);
+
+        List<UserByReplyFeignResponse> userByReplyFeignResponseList = new ArrayList<>();
+
+        for (UserByReplyFeignRequest userByReplyFeignRequest : userByReplyFeignRequestList) {
+            for (User user : userList) {
+                if(userByReplyFeignRequest.getUserSeq().equals(user.getUserSeq())) {
+                    userByReplyFeignResponseList.add(new UserByReplyFeignResponse(userByReplyFeignRequest.getReplySeq(),
+                            userByReplyFeignRequest.getUserSeq(), user.getUserId(), user.getNickname()));
+                }
+            }
+        }
+
+        return userByReplyFeignResponseList;
     }
 }
