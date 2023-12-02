@@ -16,8 +16,7 @@ public class BlogQueryController {
     //유저의 블로그 정보 조회
     @GetMapping("/api/blog/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response readBlog(@PathVariable Long userSeq){
+    public Response readBlog(@PathVariable Long userSeq) {
         return Response.success(blogService.readBlog(userSeq));
     }
-
 }
