@@ -19,4 +19,10 @@ public class BlogQueryController {
     public Response readBlog(@PathVariable Long userSeq) {
         return Response.success(blogService.readBlog(userSeq));
     }
+
+    @GetMapping("/api/blog")
+    @ResponseStatus(HttpStatus.OK)
+    public Response readLoginUserBlog(@RequestHeader(value = "userSeq") Long userSeq){
+        return Response.success(blogService.readBlog(userSeq));
+    }
 }
