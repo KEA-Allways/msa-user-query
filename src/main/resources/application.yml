@@ -1,3 +1,6 @@
+server:
+  port: 8084
+
 spring:
   application:
     name: user-query-service
@@ -6,29 +9,19 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: 1234
-    jpa:
-      database: mysql
-      open-in-view: false
-      show-sql: true
-      hibernate:
-        properties:
-          hibernate:
-            format_sql: true
+  jpa:
+    database: mysql
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      properties:
+        hibernate:
+          format_sql: true
 
-  # 로깅 설정
-  logging:
-    level:
-      org.hibernate.SQL: debug
-      org.hibernate.type: trace
-
-  # 서버 설정
-server:
-  port: 8084
-
-# Eureka 클라이언트 설정
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: user-query-service
   client:
     register-with-eureka: true
     fetch-registry: true
