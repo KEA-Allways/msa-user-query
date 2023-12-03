@@ -16,12 +16,15 @@ spring:
           format_sql: true
 server:
   port: 8084
+  address: 44.201.129.31
 
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://3.213.139.105:8761/eureka
+
