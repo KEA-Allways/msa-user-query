@@ -23,6 +23,7 @@ public class UserFeignService {
         User user = userRepository.findUserByUserSeq(userSeq).orElseThrow(UserNotFoundException::new);
 
         return new UserFeignResponse(
+                user.getUserSeq(),
                 user.getUserId(),
                 user.getNickname(),
                 user.getEmail(),
@@ -33,8 +34,8 @@ public class UserFeignService {
 
     public UserFeignResponse queryUserByEmail(String email){
         User user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
-
         return new UserFeignResponse(
+                user.getUserSeq(),
                 user.getUserId(),
                 user.getNickname(),
                 user.getEmail(),
