@@ -2,17 +2,6 @@ server:
   port: 8084
   address: 44.201.129.31
 
-eureka:
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-    hostname: user-query-service
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://3.213.139.105:8761/eureka
-
-
 spring:
   application:
     name: user-query-service
@@ -29,6 +18,18 @@ spring:
       properties:
         hibernate:
           format_sql: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: user-query-service
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://3.213.139.105:8761/eureka
+
+
 
 
 
