@@ -16,7 +16,7 @@ spring:
           format_sql: true
 server:
   port: 8084
-# port: 0
+  address: 44.201.129.31
 
 eureka:
   instance:
