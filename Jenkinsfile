@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     tools {
-        maven "Maven3.8.5"
-    }
+             maven 'Maven3.8.5'
+         }
 
 
 
     environment {
         
 
-        
+
         //서버 정보
         ip = "44.201.129.31"
         username = "ubuntu"
