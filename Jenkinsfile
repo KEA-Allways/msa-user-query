@@ -9,6 +9,7 @@ pipeline {
 
     environment {
         
+
         
         //서버 정보
         ip = "44.201.129.31"
