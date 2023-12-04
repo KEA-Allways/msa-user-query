@@ -57,6 +57,12 @@ pipeline {
                                 junit '**/build/reports/jacoco/test/jacocoTestReport.xml'
                         }
                     }
+
+                     post {
+                            always {
+                                junit skipPublishingChecks: true, testResults: '**/cpputest_*.xml'
+                            }
+                        }
                 }
 
 
