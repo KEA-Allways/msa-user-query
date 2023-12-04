@@ -48,11 +48,11 @@ pipeline {
           }
         }
 
-        
+
 
         stage('SonarQube Analysis') {
                      steps {
-                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeInstall) {
+                                     withSonarQubeEnv(credentialsId: sonarqube-access-token, installationName: sonarqube-server) {
                                          sh """
                                          ./gradlew sonar -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential}
                                          """
