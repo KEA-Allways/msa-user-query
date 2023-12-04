@@ -54,15 +54,10 @@ pipeline {
                         script {
                                 sh "chmod +x gradlew; ./gradlew test"
                                 junit '**/build/test-results/test/*.xml'
-                                junit '**/build/reports/jacoco/test/jacocoTestReport.xml'
                         }
                     }
 
-                     post {
-                            always {
-                                junit skipPublishingChecks: true, testResults: '**/cpputest_*.xml'
-                            }
-                        }
+
                 }
 
 
