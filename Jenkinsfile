@@ -31,7 +31,7 @@ pipeline {
 
     stages {
         // git에서 repository clone
-        stage('git repository clone') {
+        stage('Git Repository Clone') {
           steps {
             echo 'Clonning Repository'
               git url: giturl,
@@ -57,9 +57,9 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
+        stage('SonarQube Analysis') {
                      steps {
-                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeCredential) {
+                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeInstall) {
                                          sh """
                                          ./gradlew sonar -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential}
                                          """
@@ -87,7 +87,7 @@ pipeline {
         }
         
         // docker build
-        stage('Bulid Docker') {
+        stage('Bulid Docker Image') {
           steps {
             echo 'Bulid Docker'
             script {
@@ -103,7 +103,7 @@ pipeline {
         }
 
         // docker push
-        stage('Push Docker') {
+        stage('Push Image To Docker Hub') {
           steps {
             echo 'Push Docker'
             script {
@@ -119,7 +119,7 @@ pipeline {
           }
         }
         
-        stage('Run Container on Dev Server') {
+        stage('Run Docker Container on Dev Server') {
           steps {
             echo 'Run Container on Dev Server'
             
