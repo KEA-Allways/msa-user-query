@@ -26,8 +26,10 @@ pipeline {
         branchname = "prod"
 
         //소나 큐브
+        sonarqubeInstall = "sonarqube"
         sonarqubeCredential = "sonarqube-access-token"
         sonarqubeUrl = "http://18.204.16.65:9000"
+        projectKey = "msa-user-query"
     }
 
     stages {
@@ -51,8 +53,8 @@ pipeline {
 
         stage('Sonarqube analysis') {
             steps {
-               withSonarQubeEnv(sonarqube-server) {
-                    sh './gradlew sonarqube -Dsonar.projectKey=msa-user-query -Dsonar.host.url=sonarqubeUrl -Dsonar.login=sonarqubeCredential'
+               withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeInstall) {
+                    sh './gradlew sonarqube -Dsonar.projectKey=projectKey -Dsonar.host.url=sonarqubeUrl -Dsonar.login=sonarqubeCredential'
                 }
             }
         }
