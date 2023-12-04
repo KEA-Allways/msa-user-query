@@ -24,11 +24,11 @@ pipeline {
 
         //소나 큐브
         sonarqubeInstall = "sonarqube-server"
-        sonarqubeCredential = "sqp_5b252129b3c05271feefb1b99498be7009f27130"
+        sonarqubeCredential = "squ_d3bd789bd0e7a614c72b97010c79eb1b2c67985c"
         sonarqubeUrl = "http://18.204.16.65:9000"
         projectKey = "msa-user-query"
     }
-    
+
 
     stages {
         // git에서 repository clone
@@ -48,6 +48,15 @@ pipeline {
              }
           }
         }
+
+        stage('Junit Test') {
+                    steps{
+                        script {
+                                sh "chmod +x gradlew; ./gradlew test"
+                                junit '**/build/test-results/test/*.xml'
+                        }
+                    }
+                }
 
 
 
