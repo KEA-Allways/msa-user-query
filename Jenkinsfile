@@ -45,14 +45,11 @@ pipeline {
           }
         }
 
-        stage('SonarQube analysis') {
-                    steps{
-                        withSonarQubeEnv('sonarqube'){
-                            sh "mvn clean package"
-                            sh "mvn sonar:sonar -Dsonar.projectKey=msa-user-query -Dsonar.host.url=http://18.204.16.65/:9000 -Dsonar.login=sqp_5b252129b3c05271feefb1b99498be7009f27130"
-                        }
-                    }
+        stage('Sonarqube') {
+                withSonarQubeEnv('sonarqube') {
+                    sh './gradlew sonarqube -Dsonar.projectKey=vue-spring -Dsonar.host.url=http://18.204.16.65/:9000 -Dsonar.login=sonarqube-access-token'
                 }
+            }
 
         // gradle build
         stage('Bulid Gradle') {
