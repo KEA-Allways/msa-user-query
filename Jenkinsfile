@@ -1,17 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-             maven "Maven3.8.5"
-
-         }
-
-
-
     environment {
         
-
-
         //서버 정보
         ip = "44.201.129.31"
         username = "ubuntu"
@@ -40,7 +31,7 @@ pipeline {
 
     stages {
         // git에서 repository clone
-        stage('Prepare') {
+        stage('git repository clone') {
           steps {
             echo 'Clonning Repository'
               git url: giturl,
@@ -57,15 +48,27 @@ pipeline {
           }
         }
 
+        stage('Junit Test') {
+            steps{
+                script {
+                        sh "chmod +x gradlew; ./gradlew test"
+                }
+            }
+        }
+
         stage('SonarQube analysis') {
                      steps {
-                                     withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube-server') {
+                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeInstall) {
                                          sh """
-                                         ./gradlew sonar -Dsonar.projectKey=msa-user-query -Dsonar.host.url=http://18.204.16.65:9000 -Dsonar.login=sqp_5b252129b3c05271feefb1b99498be7009f27130
+                                         ./gradlew sonar -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential}
                                          """
                                      }
                              }
                  }
+
+        stage('Publish test results') {
+                junit '**/build/test-results/test/*.xml'
+         }
 
         // gradle build
         stage('Bulid Gradle') {
