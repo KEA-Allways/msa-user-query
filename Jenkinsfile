@@ -26,7 +26,7 @@ pipeline {
         branchname = "prod"
 
         //소나 큐브
-        sonarqubeInstall = "sonarqube"
+        sonarqubeInstall = "sonarqube-server"
         sonarqubeCredential = "sonarqube-access-token"
         sonarqubeUrl = "http://18.204.16.65:9000"
         projectKey = "msa-user-query"
