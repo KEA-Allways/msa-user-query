@@ -59,7 +59,7 @@ pipeline {
 
         stage('SonarQube analysis') {
                      steps {
-                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeInstall) {
+                                     withSonarQubeEnv(credentialsId: sonarqubeCredential, installationName: sonarqubeCredential) {
                                          sh """
                                          ./gradlew sonar -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential}
                                          """
