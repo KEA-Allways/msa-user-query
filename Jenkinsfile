@@ -24,6 +24,10 @@ pipeline {
         giturl = 'https://github.com/KEA-Allways/msa-user-query.git/'
         gitCredential = "github-access-token"
         branchname = "prod"
+
+        //소나 큐브
+        sonarqubeCredential = "sonarqube-access-token"
+        sonarqubeUrl = "http://18.204.16.65:9000"
     }
 
     stages {
@@ -45,10 +49,10 @@ pipeline {
           }
         }
 
-        stage('sonarqube') {
+        stage('sonarqube-server') {
             steps {
-               withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube') {
-                    sh './gradlew sonarqube -Dsonar.projectKey=vue-spring -Dsonar.host.url=http://18.204.16.65/:9000'
+               withSonarQubeEnv(credentialsId: sonarqubeCredential) {
+                    sh './gradlew sonarqube -Dsonar.projectKey=msa-user-query -Dsonar.host.url=sonarqubeUrl -Dsonar.login=sonarqubeCredential'
                 }
             }
         }
