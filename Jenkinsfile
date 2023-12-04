@@ -54,6 +54,7 @@ pipeline {
                         script {
                                 sh "chmod +x gradlew; ./gradlew test"
                                 junit '**/build/test-results/test/*.xml'
+                                junit '**/build/reports/jacoco/test/jacocoTestReport.xml'
                         }
                     }
                 }
@@ -64,7 +65,7 @@ pipeline {
                      steps {
                                      withSonarQubeEnv(credentialsId: "sonarqube-access-token", installationName: "sonarqube-server") {
                                          sh """
-                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential} -Dsonar.coverage.jacoco.xmlReportPaths="${buildDir}/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
+                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential} -Dsonar.coverage.jacoco.xmlReportPaths="**/build/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
                                          """
                                      }
                              }
