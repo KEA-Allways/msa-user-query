@@ -58,14 +58,12 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-                     stage('sonarqube') {
-                                 steps {
+                     steps {
                                      withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube-server') {
                                          sh """
                                          ./gradlew sonar -Dsonar.projectKey=msa-user-query -Dsonar.host.url=http://18.204.16.65:9000 -Dsonar.login=sqp_5b252129b3c05271feefb1b99498be7009f27130
                                          """
                                      }
-                                 }
                              }
                  }
 
