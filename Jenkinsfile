@@ -3,7 +3,7 @@ pipeline {
 
     tools {
              maven "Maven3.8.5"
-             
+
          }
 
 
@@ -58,11 +58,15 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-                     steps {
-                         withSonarQubeEnv('sonarqube-server') {
-                             sh 'mvn sonar:sonar'
-                         }
-                     }
+                     stage('sonarqube') {
+                                 steps {
+                                     withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube-server') {
+                                         sh """
+                                         ./gradlew sonar -Dsonar.projectKey=msa-user-query -Dsonar.host.url=http://18.204.16.65:9000 -Dsonar.login=sqp_5b252129b3c05271feefb1b99498be7009f27130
+                                         """
+                                     }
+                                 }
+                             }
                  }
 
         // gradle build
