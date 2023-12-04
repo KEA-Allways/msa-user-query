@@ -6,19 +6,21 @@ plugins {
 	id "jacoco"
 }
 
+jacoco {
+	// JaCoCo 버전
+	toolVersion = '0.8.5'
+
+}
 
 jacocoTestReport {
 	reports {
 		xml.required.set(true)
-		csv.required.set(false)
+		csv.required.set(true)
 		html.required.set(true)
-
-
-// 리포트의 저장 경로를 설정합니다.
-		html.destination file("jacoco/jacocoHtml")
-		xml.destination file("jacoco/jacoco.xml")
 	}
 }
+
+
 
 
 
@@ -72,6 +74,7 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()
