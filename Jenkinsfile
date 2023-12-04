@@ -52,6 +52,7 @@ pipeline {
             steps{
                 script {
                         sh "chmod +x gradlew; ./gradlew test"
+                        junit '**/build/test-results/test/*.xml'
                 }
             }
         }
@@ -66,9 +67,7 @@ pipeline {
                              }
                  }
 
-        stage('Publish test results') {
-                junit '**/build/test-results/test/*.xml'
-         }
+
 
         // gradle build
         stage('Bulid Gradle') {
