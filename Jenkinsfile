@@ -24,11 +24,11 @@ pipeline {
 
         //소나 큐브
         sonarqubeInstall = "sonarqube-server"
-        sonarqubeCredential = "sqp_5b252129b3c05271feefb1b99498be7009f27130"
+        sonarqubeCredential = "sqp_a26a7b736b750879751189d5f44f9b5e86fd04b3"
         sonarqubeUrl = "http://18.204.16.65:9000"
         projectKey = "msa-user-query"
     }
-    
+
 
     stages {
         // git에서 repository clone
