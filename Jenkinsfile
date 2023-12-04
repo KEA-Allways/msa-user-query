@@ -51,15 +51,7 @@ pipeline {
           }
         }
 
-        stage("sonarqube") {
-             steps{
-                 script{
-                        def scannerHome = tool 'sonarqube-scanner';
-                        withSonarQubeEnv(credentialsId:"sonarqube-access-token",installationName:'sonarqube-server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-             }
-        }
+      
 
         // gradle build
         stage('Bulid Gradle') {
