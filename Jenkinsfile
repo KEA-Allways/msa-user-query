@@ -46,10 +46,12 @@ pipeline {
         }
 
         stage('Sonarqube') {
-                withSonarQubeEnv('sonarqube') {
-                    sh './gradlew sonarqube -Dsonar.projectKey=vue-spring -Dsonar.host.url=http://18.204.16.65/:9000 -Dsonar.login=sonarqube-access-token'
+            steps {
+               withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube') {
+                    sh './gradlew sonarqube -Dsonar.projectKey=vue-spring -Dsonar.host.url=http://18.204.16.65/:9000'
                 }
             }
+        }
 
         // gradle build
         stage('Bulid Gradle') {
