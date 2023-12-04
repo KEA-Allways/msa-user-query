@@ -54,7 +54,6 @@ pipeline {
                         script {
                                 sh "chmod +x gradlew; ./gradlew test"
                                 junit '**/build/test-results/test/*.xml'
-                                junit '**/build/reports/tests/tests/test/index.html'
                         }
                     }
 
