@@ -28,6 +28,7 @@ pipeline {
         sonarqubeUrl = "http://18.204.16.65:9000"
         projectKey = "msa-user-query"
     }
+    
 
     stages {
         // git에서 repository clone
