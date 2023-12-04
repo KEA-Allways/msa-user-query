@@ -45,7 +45,7 @@ pipeline {
           }
         }
 
-        stage('Sonarqube') {
+        stage('sonarqube') {
             steps {
                withSonarQubeEnv(credentialsId: 'sonarqube-access-token', installationName:'sonarqube') {
                     sh './gradlew sonarqube -Dsonar.projectKey=vue-spring -Dsonar.host.url=http://18.204.16.65/:9000'
