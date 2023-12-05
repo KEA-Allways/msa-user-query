@@ -67,7 +67,7 @@ pipeline {
                      steps {
                                      withSonarQubeEnv(credentialsId: "sonarqube-access-token", installationName: "sonarqube-server") {
                                          sh """
-                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential} -Dsonar.coverage.jacoco.xmlReportPaths="**/build/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
+                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=sqp_cb5d7df6643c641172a50dc7bc585c35ce22c909 -Dsonar.coverage.jacoco.xmlReportPaths="**/build/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
                                          """
                                      }
                              }
