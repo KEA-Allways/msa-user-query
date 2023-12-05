@@ -2,7 +2,9 @@ package com.allways.domain.user.controller;
 
 import com.allways.common.response.Response;
 import com.allways.domain.user.service.UserService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +21,9 @@ public class UserQueryController {
         return Response.success(userService.readUserBySeq(userSeq));
     }
 
-    // 특정 유저의 아이디로 정보 조회
-    @GetMapping("/api/user/{userId}")
+    @GetMapping("/api/user/{userSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response readSpecificUser(@PathVariable String userId) {
-        return Response.success(userService.readUserById(userId));
+    public Response readSpecificUser(@PathVariable Long userSeq) {
+        return Response.success(userService.readUserBySeq(userSeq));
     }
 }

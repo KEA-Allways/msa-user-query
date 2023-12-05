@@ -3,7 +3,9 @@ package com.allways.common.feign.blog;
 import com.allways.domain.blog.entity.Blog;
 import com.allways.domain.blog.exception.BlogNotFoundException;
 import com.allways.domain.blog.repository.BlogRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,6 +19,7 @@ public class BlogFeignService {
 
     public BlogFeignResponse queryBlog(Long userSeq) {
         Blog blog = blogRepository.findBlogByUserSeq(userSeq).orElseThrow(BlogNotFoundException::new);
+        System.out.println(blog.getBlogSeq());
         return new BlogFeignResponse(blog.getBlogSeq(), blog.getBlogName(), blog.getBlogDescription());
     }
 
