@@ -17,6 +17,7 @@ pipeline {
         dockerImage = ''
         tagname = "dev"
         
+        
         //깃 정보
         giturl = 'https://github.com/KEA-Allways/msa-user-query.git/'
         gitCredential = "github-access-token"
