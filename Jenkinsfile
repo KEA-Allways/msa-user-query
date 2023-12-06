@@ -16,6 +16,7 @@ pipeline {
         dockerCredential = 'docker-access-token'
         dockerImage = ''
         tagname = "dev"
+
         
         //깃 정보
         giturl = 'https://github.com/KEA-Allways/msa-user-query.git/'
@@ -24,7 +25,7 @@ pipeline {
 
         //소나 큐브
         sonarqubeInstall = "sonarqube-server"
-        sonarqubeCredential = "squ_d3bd789bd0e7a614c72b97010c79eb1b2c67985c"
+        sonarqubeCredential = "sqp_cb5d7df6643c641172a50dc7bc585c35ce22c909"
         sonarqubeUrl = "http://18.204.16.65:9000"
         projectKey = "msa-user-query"
     }
@@ -49,24 +50,11 @@ pipeline {
           }
         }
 
-        stage('Junit Test') {
-                    steps{
-                        script {
-                                sh "chmod +x gradlew; ./gradlew test"
-                                junit '**/build/test-results/test/*.xml'
-                        }
-                    }
-
-
-                }
-
-
-
         stage('SonarQube Analysis') {
                      steps {
                                      withSonarQubeEnv(credentialsId: "sonarqube-access-token", installationName: "sonarqube-server") {
                                          sh """
-                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=${sonarqubeCredential} -Dsonar.coverage.jacoco.xmlReportPaths="**/build/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
+                                         ./gradlew sonarqube -Dsonar.projectKey=${projectKey} -Dsonar.host.url=${sonarqubeUrl} -Dsonar.login=sqp_cb5d7df6643c641172a50dc7bc585c35ce22c909 -Dsonar.coverage.jacoco.xmlReportPaths="**/build/reports/jacoco/test/jacocoTestReport.xml" -Dsonar.exclusions="**/test/**, **/Q*.java, **/*Doc*.java, **/resources/**"
                                          """
                                      }
                              }

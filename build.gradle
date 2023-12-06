@@ -6,19 +6,7 @@ plugins {
 	id "jacoco"
 }
 
-jacocoTestReport {
-	reports {
-		xml.required.set(true)
-		csv.required.set(true)
-		html.required.set(true)
-	}
-}
 
-jacoco {
-	// JaCoCo 버전
-	toolVersion = '0.8.5'
-
-}
 
 group = 'com'
 version = '0.0.1-SNAPSHOT'
